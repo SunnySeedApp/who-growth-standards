@@ -3,10 +3,27 @@
   "version": "1.0.0",
   "description": "WHO Child Growth Standards: z-scores and percentiles computed locally. Official LMS tables bundled, zero network calls, zero dependencies.",
   "keywords": [
-    "who", "growth-standards", "percentile", "z-score", "lms",
-    "pediatrics", "child-growth", "anthropometry", "bmi", "healthcare"
+    "who",
+    "growth-standards",
+    "percentile",
+    "z-score",
+    "lms",
+    "pediatrics",
+    "child-growth",
+    "anthropometry",
+    "bmi",
+    "healthcare"
   ],
   "license": "MIT",
+  "author": "Roman Koropets",
+  "homepage": "https://sunnyseed.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SunnySeedApp/who-growth-standards.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SunnySeedApp/who-growth-standards/issues"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,10 +35,16 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "prepublishOnly": "npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
@@ -32,5 +55,7 @@
     "typescript": "^5.4.0",
     "vitest": "^1.6.0"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  }
 }
