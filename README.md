@@ -166,7 +166,7 @@ Issues and pull requests welcome. Useful directions:
 
 MIT — see [LICENSE](LICENSE).
 
-The bundled WHO data is published by the World Health Organization; this package reproduces it for computational use and is not affiliated with or endorsed by the WHO.
+The bundled WHO data is published by the World Health Organization and reproduced here for computational use; see [NOTICE](NOTICE). This project is not affiliated with or endorsed by the WHO.
 
 ---
 
