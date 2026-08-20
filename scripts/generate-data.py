@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Генерирует src/data/*.ts из официальных таблиц ВОЗ.
+"""Generate src/data/*.ts from the official WHO reference tables.
 
-Скачивает expanded tables (LMS по дням / по росту) с cdn.who.int и
-превращает их в типизированные TypeScript-модули. Запускать при
-обновлении стандартов ВОЗ:
+Downloads the WHO expanded tables (LMS by day for age-based indicators, by
+length/height for the rest) from cdn.who.int and turns them into typed
+TypeScript modules. Run this when the WHO publishes a revision:
 
     python3 scripts/generate-data.py
 
-Требует: openpyxl (pip install openpyxl)
+Downloads are cached in scripts/.cache, so re-runs are offline and cheap.
+Requires: openpyxl (pip install openpyxl)
 """
 import os
 import urllib.request
