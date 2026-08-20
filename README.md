@@ -19,10 +19,10 @@ Neither is great when the input is a baby's weight. So this package takes the th
 ```ts
 import { weightForAge, ageInDays, classify } from "who-growth-standards";
 
-const age = ageInDays(new Date("2025-11-14"));   // → 279
-const result = weightForAge(8.9, { sex: "female", ageDays: age });
+const age = ageInDays(new Date("2025-11-14"));   // days since that birthday
+const result = weightForAge(8.9, { sex: "female", ageDays: 279 });
 
-result.zScore;      // 0.5989…
+result.zScore;      // 0.5993…
 result.percentile;  // 72.55…
 result.median;      // 8.27  — the 50th-percentile weight at this age
 classify(result.zScore);  // "normal"
@@ -81,6 +81,8 @@ weightForAge(5.2, { sex: "male", ageDays: corrected }).zScore;      // −0.69 �
 ```
 
 Same baby, same weight, opposite conclusions. Correction is conventionally applied until 2 years, or 3 for extreme prematurity — that cut-off is a clinical judgement, so this library computes the corrected age and leaves the decision to you.
+
+Only births before **37 weeks** are corrected. 37–39 weeks is term, and correcting a term baby would quietly inflate its percentile, so `correctedAgeInDays` returns the chronological age unchanged from 37 weeks up.
 
 One thing correction does **not** apply to: vaccination schedules, which follow chronological age.
 

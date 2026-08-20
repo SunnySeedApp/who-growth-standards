@@ -1,6 +1,6 @@
 {
   "name": "who-growth-standards",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WHO Child Growth Standards: z-scores and percentiles computed locally. Official LMS tables bundled, zero network calls, zero dependencies.",
   "keywords": [
     "who",

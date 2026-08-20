@@ -152,6 +152,9 @@ export function ageInDays(birthDate: Date, on: Date = new Date()): number {
   return Math.floor((utc(on) - utc(birthDate)) / 86_400_000);
 }
 
+/** Below this gestational age a birth is preterm and the age gets corrected. */
+const PRETERM_THRESHOLD_WEEKS = 37;
+
 /**
  * Corrected age for preterm infants: chronological age minus the weeks
  * missing from a 40-week term.
@@ -162,11 +165,15 @@ export function ageInDays(birthDate: Date, on: Date = new Date()): number {
  * prematurity — the cut-off is a clinical decision, so this function leaves it
  * to the caller and simply returns the corrected value.
  *
+ * Only births before 37 weeks are corrected. 37–39 weeks is term (WHO calls
+ * 37–38 "early term"), and no guideline corrects those: shaving days off a
+ * term baby's age would silently inflate its percentile.
+ *
  * Note: correction applies to growth and development, **not** to vaccination
  * schedules, which follow chronological age.
  */
 export function correctedAgeInDays(ageDays: number, gestationalAgeWeeks: number): number {
-  if (gestationalAgeWeeks >= 40) return ageDays;
+  if (gestationalAgeWeeks >= PRETERM_THRESHOLD_WEEKS) return ageDays;
   return Math.max(0, ageDays - (40 - gestationalAgeWeeks) * 7);
 }
 

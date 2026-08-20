@@ -124,10 +124,18 @@ describe("helpers", () => {
   it("corrects age for prematurity", () => {
     // Born at 32 weeks = 8 weeks early = 56 days.
     expect(correctedAgeInDays(100, 32)).toBe(44);
-    // Term babies are unaffected.
-    expect(correctedAgeInDays(100, 40)).toBe(100);
     // Never goes negative.
     expect(correctedAgeInDays(10, 28)).toBe(0);
+  });
+
+  it("leaves term births alone, including early term", () => {
+    // 37 weeks is the preterm boundary — at and above it, nothing is corrected.
+    // Correcting a 38-weeker would shave 14 days off and inflate its percentile.
+    for (const weeks of [37, 38, 39, 40, 41, 42]) {
+      expect(correctedAgeInDays(100, weeks)).toBe(100);
+    }
+    // One week earlier is preterm and does get corrected.
+    expect(correctedAgeInDays(100, 36)).toBe(72);
   });
 
   it("classifies by WHO cut-offs", () => {
